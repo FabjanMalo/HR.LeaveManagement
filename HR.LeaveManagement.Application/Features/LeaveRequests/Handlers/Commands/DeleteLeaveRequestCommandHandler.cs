@@ -14,7 +14,7 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequests.Handlers.Command
 public class DeleteLeaveRequestCommandHandler(
     ILeaveRequestRepository _leaveRequestRepository,
     IMapper _mapper)
-    : IRequestHandler<DeleteLeaveRequestCommand>
+    : IRequestHandler<DeleteLeaveRequestCommand, Unit>
 {
     public async Task<Unit> Handle(DeleteLeaveRequestCommand request, CancellationToken cancellationToken)
     {

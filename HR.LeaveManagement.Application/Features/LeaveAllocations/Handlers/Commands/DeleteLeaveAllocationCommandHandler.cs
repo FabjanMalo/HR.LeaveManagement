@@ -12,11 +12,12 @@ using System.Threading.Tasks;
 
 namespace HR.LeaveManagement.Application.Features.LeaveAllocations.Handlers.Commands;
 public class DeleteLeaveAllocationCommandHandler(
-    ILeaveAllocationRepository _leaveAllocationRepository,
-    IMapper _mapper)
-    : IRequestHandler<DeleteLeaveAllocationCommand>
+    ILeaveAllocationRepository _leaveAllocationRepository)
+    : IRequestHandler<DeleteLeaveAllocationCommand, Unit>
 {
-    public async Task<Unit> Handle(DeleteLeaveAllocationCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(
+        DeleteLeaveAllocationCommand request,
+        CancellationToken cancellationToken)
     {
         var leaveAllocation = await _leaveAllocationRepository.Get(request.Id);
 
