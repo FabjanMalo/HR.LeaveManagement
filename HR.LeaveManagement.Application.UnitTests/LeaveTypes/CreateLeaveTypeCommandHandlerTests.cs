@@ -7,6 +7,7 @@ using HR.LeaveManagement.Application.Features.LeaveTypes.Requests.Commands;
 using HR.LeaveManagement.Application.Features.LeaveTypes.Requests.Queries;
 using HR.LeaveManagement.Application.Persistence.Contracts;
 using HR.LeaveManagement.Application.Profiles;
+using HR.LeaveManagement.Application.Responses;
 using HR.LeaveManagement.Application.UnitTests.Mocks;
 using Moq;
 using Shouldly;
@@ -49,7 +50,7 @@ public class CreateLeaveTypeCommandHandlerTests
 
         var leaveType = await _mockRepo.Object.GetAll();
 
-        result.ShouldBeOfType<int>();
+        result.ShouldBeOfType<BaseCommandResponse>();
         
         leaveType.Count.ShouldBe(3);
 
