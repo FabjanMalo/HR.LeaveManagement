@@ -1,15 +1,22 @@
 using HR.LeaveManagement.Application;
 using HR.LeaveManagement.Infrastructure;
 using HR.LeaveManagement.Persistence;
+using HR.LeaveManagement.Identity;
+using Microsoft.OpenApi.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSwaggerGen(x => x.AddSwaggerDoc());
+
 builder.Services.ConfigurePersistanceServices(builder.Configuration);
+
 builder.Services.ConfigureApplicationServices();
+
 builder.Services.ConfigureInfrastructureServices(builder.Configuration);
 
+builder.Services.ConfigureIdentityService(builder.Configuration);
 
 builder.Services.AddControllers();
 
@@ -30,10 +37,14 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HR.LeaveManagement.Api v1"));
 }
 
+app.UseAuthentication();
+
 app.UseHttpsRedirection();
+
+app.UseAuthorization();
 
 app.UseCors("CorsPolicy");
 
